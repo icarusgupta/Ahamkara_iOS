@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9392C7E252E64AA003E86D2 /* GenericRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C7D252E64AA003E86D2 /* GenericRecord.swift */; };
+		E9392C86252E68C4003E86D2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C85252E68C4003E86D2 /* Helper.swift */; };
+		E9392C92252F1BD1003E86D2 /* GenericRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */; };
+		E9392C9A252F24C1003E86D2 /* GenericRecordModelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C99252F24C1003E86D2 /* GenericRecordModelList.swift */; };
+		E9392C9F252F2AD9003E86D2 /* ModelMappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C9E252F2AD9003E86D2 /* ModelMappings.swift */; };
 		E9F7FF21252E52B2005DFAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */; };
 		E9F7FF23252E52B2005DFAF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF22252E52B2005DFAF1 /* SceneDelegate.swift */; };
 		E9F7FF25252E52B2005DFAF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF24252E52B2005DFAF1 /* ContentView.swift */; };
@@ -15,6 +20,8 @@
 		E9F7FF2D252E52B3005DFAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9F7FF2B252E52B3005DFAF1 /* LaunchScreen.storyboard */; };
 		E9F7FF38252E52B4005DFAF1 /* ThoughtManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF37252E52B4005DFAF1 /* ThoughtManagerTests.swift */; };
 		E9F7FF43252E52B4005DFAF1 /* ThoughtManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF42252E52B4005DFAF1 /* ThoughtManagerUITests.swift */; };
+		E9F7FF57252E5A2B005DFAF1 /* OneDayGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF56252E5A2B005DFAF1 /* OneDayGraph.swift */; };
+		E9F7FF5F252E5A49005DFAF1 /* HistoricalGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF5E252E5A49005DFAF1 /* HistoricalGraph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9392C7D252E64AA003E86D2 /* GenericRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecord.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E9392C85252E68C4003E86D2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecordModel.swift; sourceTree = "<group>"; };
+		E9392C99252F24C1003E86D2 /* GenericRecordModelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecordModelList.swift; sourceTree = "<group>"; };
+		E9392C9E252F2AD9003E86D2 /* ModelMappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMappings.swift; sourceTree = "<group>"; };
 		E9F7FF1D252E52B2005DFAF1 /* ThoughtManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThoughtManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F7FF22252E52B2005DFAF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +61,8 @@
 		E9F7FF3E252E52B4005DFAF1 /* ThoughtManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThoughtManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F7FF42252E52B4005DFAF1 /* ThoughtManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtManagerUITests.swift; sourceTree = "<group>"; };
 		E9F7FF44252E52B4005DFAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9F7FF56252E5A2B005DFAF1 /* OneDayGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDayGraph.swift; sourceTree = "<group>"; };
+		E9F7FF5E252E5A49005DFAF1 /* HistoricalGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9392C90252F1BA2003E86D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */,
+				E9392C99252F24C1003E86D2 /* GenericRecordModelList.swift */,
+				E9392C9E252F2AD9003E86D2 /* ModelMappings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E9F7FF14252E52B2005DFAF1 = {
 			isa = PBXGroup;
 			children = (
@@ -99,9 +123,13 @@
 		E9F7FF1F252E52B2005DFAF1 /* ThoughtManager */ = {
 			isa = PBXGroup;
 			children = (
-				E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */,
+				E9392C90252F1BA2003E86D2 /* Models */,
+				E9F7FF55252E597F005DFAF1 /* Tabs */,
 				E9F7FF22252E52B2005DFAF1 /* SceneDelegate.swift */,
+				E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */,
 				E9F7FF24252E52B2005DFAF1 /* ContentView.swift */,
+				E9392C85252E68C4003E86D2 /* Helper.swift */,
+				E9392C7D252E64AA003E86D2 /* GenericRecord.swift */,
 				E9F7FF26252E52B3005DFAF1 /* Assets.xcassets */,
 				E9F7FF2B252E52B3005DFAF1 /* LaunchScreen.storyboard */,
 				E9F7FF2E252E52B3005DFAF1 /* Info.plist */,
@@ -134,6 +162,15 @@
 				E9F7FF44252E52B4005DFAF1 /* Info.plist */,
 			);
 			path = ThoughtManagerUITests;
+			sourceTree = "<group>";
+		};
+		E9F7FF55252E597F005DFAF1 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				E9F7FF56252E5A2B005DFAF1 /* OneDayGraph.swift */,
+				E9F7FF5E252E5A49005DFAF1 /* HistoricalGraph.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +303,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9392C92252F1BD1003E86D2 /* GenericRecordModel.swift in Sources */,
 				E9F7FF21252E52B2005DFAF1 /* AppDelegate.swift in Sources */,
+				E9392C86252E68C4003E86D2 /* Helper.swift in Sources */,
+				E9F7FF5F252E5A49005DFAF1 /* HistoricalGraph.swift in Sources */,
+				E9392C9F252F2AD9003E86D2 /* ModelMappings.swift in Sources */,
+				E9392C7E252E64AA003E86D2 /* GenericRecord.swift in Sources */,
+				E9392C9A252F24C1003E86D2 /* GenericRecordModelList.swift in Sources */,
 				E9F7FF23252E52B2005DFAF1 /* SceneDelegate.swift in Sources */,
+				E9F7FF57252E5A2B005DFAF1 /* OneDayGraph.swift in Sources */,
 				E9F7FF25252E52B2005DFAF1 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +485,7 @@
 				DEVELOPMENT_TEAM = 4ZHAWAS2L9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ThoughtManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,6 +507,7 @@
 				DEVELOPMENT_TEAM = 4ZHAWAS2L9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ThoughtManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

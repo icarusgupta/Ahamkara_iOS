@@ -7,10 +7,22 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    let genericRecordList = GenericRecordModelList()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        //Image("ion")
+        NavigationView {
+            VStack {
+                List(genericRecordList.recordModelList, id:\.name){ recordModel in
+                //let recordModel = genericRecordList!.recordModelList
+                NavigationLink(destination: GenericRecord(genericRecordModel: recordModel )){
+                        Text("\(recordModel.name)")
+                    }
+                }
+            }
+        }
     }
 }
 
