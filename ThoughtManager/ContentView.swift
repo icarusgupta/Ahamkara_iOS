@@ -12,9 +12,11 @@ struct ContentView: View {
     let genericRecordList = GenericRecordModelList()
     
     var body: some View {
-        //Image("ion")
         NavigationView {
             VStack {
+                Text("Ahamkara").font(.largeTitle).foregroundColor(.purple)
+                Text("Thought Manager")
+                Image("rwdevcon-bg")
                 List(genericRecordList.recordModelList, id:\.name){ recordModel in
                 //let recordModel = genericRecordList!.recordModelList
                 NavigationLink(destination: GenericRecord(genericRecordModel: recordModel )){
@@ -22,6 +24,10 @@ struct ContentView: View {
                     }
                 }
             }
+            NavigationLink(destination: TempView()){
+                        Text("Temp")
+                }
+
         }
     }
 }
