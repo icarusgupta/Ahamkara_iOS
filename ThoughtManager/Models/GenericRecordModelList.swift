@@ -12,13 +12,13 @@ struct GenericRecordModelList {
     
     init(){
         self.recordModelList = []
-        if let activityRecordModel = GenericRecordModel(name: "Activity Record", scoreName: "Feeling Type", recordTypes: ModelMappings.instance.activityTypeList, scoreTypes: ModelMappings.instance.feelingTypeList){
+        if let activityRecordModel = GenericRecordModel(name: "Activity", scoreName: "Feeling Type", recordTypes: ModelMappings.instance.activityTypeList, scoreTypes: ModelMappings.instance.feelingTypeList){
             self.recordModelList.append(activityRecordModel)
         }
         else{
             print("Unable to create Activity Record Model")
         }
-        if let thoughtRecordModel = GenericRecordModel(name: "Thought Record", scoreName: "Feeling Type", recordTypes: ModelMappings.instance.thoughtTypeList, scoreTypes: ModelMappings.instance.feelingTypeList){
+        if let thoughtRecordModel = GenericRecordModel(name: "Thought", scoreName: "Feeling Type", recordTypes: ModelMappings.instance.thoughtTypeList, scoreTypes: ModelMappings.instance.feelingTypeList){
             self.recordModelList.append(thoughtRecordModel)
         }
         else{

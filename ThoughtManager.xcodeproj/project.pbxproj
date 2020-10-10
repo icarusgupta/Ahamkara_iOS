@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E93292CE2530AC1400BEA623 /* RecordChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93292CD2530AC1400BEA623 /* RecordChart.swift */; };
 		E93292D32530B7E100BEA623 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93292D22530B7E100BEA623 /* temp.swift */; };
+		E93292D8253105EA00BEA623 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E93292D7253105EA00BEA623 /* Colors.xcassets */; };
 		E9392C7E252E64AA003E86D2 /* GenericRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C7D252E64AA003E86D2 /* GenericRecord.swift */; };
 		E9392C86252E68C4003E86D2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C85252E68C4003E86D2 /* Helper.swift */; };
 		E9392C92252F1BD1003E86D2 /* GenericRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		E93292CD2530AC1400BEA623 /* RecordChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChart.swift; sourceTree = "<group>"; };
 		E93292D22530B7E100BEA623 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
+		E93292D7253105EA00BEA623 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E9392C7D252E64AA003E86D2 /* GenericRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecord.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E9392C85252E68C4003E86D2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecordModel.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				E9F7FF2E252E52B3005DFAF1 /* Info.plist */,
 				E9F7FF28252E52B3005DFAF1 /* Preview Content */,
 				E93292D22530B7E100BEA623 /* temp.swift */,
+				E93292D7253105EA00BEA623 /* Colors.xcassets */,
 			);
 			path = ThoughtManager;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9F7FF2D252E52B3005DFAF1 /* LaunchScreen.storyboard in Resources */,
+				E93292D8253105EA00BEA623 /* Colors.xcassets in Resources */,
 				E9F7FF2A252E52B3005DFAF1 /* Preview Assets.xcassets in Resources */,
 				E9F7FF27252E52B3005DFAF1 /* Assets.xcassets in Resources */,
 			);

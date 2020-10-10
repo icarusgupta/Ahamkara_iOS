@@ -44,6 +44,16 @@ struct ModelMappings{
            RecordType(name: FeelingType.depressed.rawValue, value: -8),
            RecordType(name: FeelingType.angry.rawValue, value: -8)]
     
+    let feelingTypeToEmoji: [String: String]
+        = [FeelingType.blissful.rawValue: "😇",
+           FeelingType.happy.rawValue: "😎",
+           FeelingType.depressed.rawValue: "😢",
+           FeelingType.angry.rawValue: "😡",
+           FeelingType.neutral.rawValue: "😐",
+           FeelingType.stressed.rawValue: "☹️",
+           FeelingType.anxious.rawValue: "😟",
+           FeelingType.excited.rawValue: "🥳"]
+    
     let activityTypeList: [RecordType]
         = [RecordType(name: "office_work", baseName: "work"),
            RecordType(name: "diy_project", baseName: "work"),

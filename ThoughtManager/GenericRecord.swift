@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct GenericRecord: View {
-    
     @State private var curDate = Date()
+    @State private var recordType = ""
     @State private var selectedRecordIndex = 0
-    @State var showsDatePicker: Bool = false
-    @State var showsPicker: Bool = false
-    @State var isPressed: [Bool]
-    @State var pressedFeeling: String = FeelingType.neutral.rawValue
+    @State private var showsDatePicker: Bool = false
+    @State private var showsPicker: Bool = false
+    @State private var isPressed: [Bool]
+    @State private var pressedFeeling: String = FeelingType.neutral.rawValue
     
     var genericRecordModel: GenericRecordModel
     var recordTypes: [RecordType]
@@ -30,24 +30,52 @@ struct GenericRecord: View {
     var body: some View {
         Form {
             Section {
-                Text("Choose date to record activity: \(curDate, formatter: Helper.app.dateFormatter)")
-                    .onTapGesture {
-                        self.showsDatePicker.toggle()
-                    }
+                HStack {
+                    Text("Select Date:")
+                    Text("\(curDate, formatter: Helper.app.dateFormatter)")
+                        .font(.subheadline)
+                        .foregroundColor(Color.orange)
+                        .padding(10)
+                        .cornerRadius(40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.purple, lineWidth: 5))
+                }.gesture(
+                    TapGesture()
+                        .onEnded({
+                            self.showsDatePicker.toggle()
+                        })
+                )
+                
                 if showsDatePicker {
                     DatePicker("Pick date", selection: $curDate, in: ...Date(), displayedComponents: .date)
-                        .labelsHidden()
+                        //.labelsHidden()
                         .frame(height: 80, alignment: .center)
                         .compositingGroup()
                         .clipped()
-                        .onTapGesture {
-                            self.showsDatePicker.toggle()
-                        }
+                        .gesture(
+                            TapGesture()
+                                .onEnded({
+                                    self.showsDatePicker.toggle()
+                                })
+                        )
                 }
-                Text("Choose \(self.recordTypeName) type")
-                    .onTapGesture {
-                        self.showsPicker.toggle()
-                    }
+                HStack{
+                    Text("Select \(self.recordTypeName):")
+                    Text("\(self.recordTypes[selectedRecordIndex].name)")                        .font(.subheadline)
+                        .foregroundColor(Color.orange)
+                        .padding(10)
+                        .cornerRadius(40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.purple, lineWidth: 5))
+
+                }.gesture(
+                    TapGesture()
+                        .onEnded({
+                            self.showsPicker.toggle()
+                        })
+                )
                 if showsPicker{
                     Picker(selection: $selectedRecordIndex, label: Text("")) {
                         ForEach(0 ..< self.recordTypes.count) {
@@ -55,32 +83,47 @@ struct GenericRecord: View {
                         }
                     }
                 }
-                VStack {
-                    Divider()
-                    //ScrollView(.horizontal) {
-                    HStack(spacing: 15) {
-                        ForEach(0..<8) { index in
-                            let pressedFeelingLocal = self.genericRecordModel.scoreTypes[index].name
-                            Image(pressedFeelingLocal)
-                                .frame(width: 30, height:30)
-                                .scaleEffect(self.isPressed[index] ? 2.0 : 1.0)
-                                .animation(.easeInOut)
-                                .foregroundColor(.green)
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded({
-                                            isPressed[index] = true
-                                            self.pressedFeeling = pressedFeelingLocal
-                                        })
-                                )
+                Section {
+                    VStack {
+                        Text("Select \(self.genericRecordModel.scoreName):")
+                        HStack(spacing: 3) {
+                            Spacer()
+                            Spacer()
+                            ForEach(0..<8) { index in
+                                let pressedFeelingLocal = self.genericRecordModel.scoreTypes[index].name
+                                Text(ModelMappings.instance.feelingTypeToEmoji[pressedFeelingLocal]!)
+                                    .frame(width: 35, height:35)
+                                    .font(.largeTitle)
+                                    .scaleEffect(self.isPressed[index] ? 1.0 : 0.7)
+                                    .padding(0)
+                                    .animation(.easeInOut)
+                                    .gesture(
+                                        TapGesture()
+                                            .onEnded({
+                                                for index in 0..<isPressed.count {
+                                                    isPressed[index] = false
+                                                }
+                                                isPressed[index] = true
+                                                self.pressedFeeling = pressedFeelingLocal
+                                            })
+                                    )
+                            }
+                            Spacer()
+                            Spacer()
                         }
-                    }.padding()
-                    //}.frame(height: 100)
-                    Divider()
-                    Spacer()
-                }.background(Color.black)
+                        Spacer()
+                        Text("\(self.pressedFeeling)")
+                            .padding(10)
+                            .foregroundColor(Color.orange)
+                            .cornerRadius(40)
+                            .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.purple, lineWidth: 5))
+
+                    }
+                }
             }
-        }
+        }.navigationBarTitle("Create Record")
     }
 }
 
