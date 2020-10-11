@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum FeelingType: String{
     case blissful, happy, excited, neutral, anxious, stressed, depressed, angry
@@ -20,39 +21,35 @@ struct RecordType{
     var baseName: String
     var value: Float
     var desc: String
+    var color: Color
     
-    init(name: String, baseName: String = "", value: Float = 0.0, desc: String = ""){
+    init(name: String, baseName: String = "", value: Float = 0.0, desc: String = "", color: Color = Color.black){
         self.name = name
         self.baseName = baseName
         self.value = value
         self.desc = desc
+        self.color = color
     }
 }
-
 
 struct ModelMappings{
     
     static var instance: ModelMappings = {return ModelMappings()}()
     
     let feelingTypeList: [RecordType]
-        = [RecordType(name: FeelingType.blissful.rawValue, value: 4),
-           RecordType(name: FeelingType.happy.rawValue, value: 2),
-           RecordType(name: FeelingType.excited.rawValue, value: 2),
-           RecordType(name: FeelingType.neutral.rawValue, value: 0),
-           RecordType(name: FeelingType.anxious.rawValue, value: -2),
-           RecordType(name: FeelingType.stressed.rawValue, value: -4),
-           RecordType(name: FeelingType.depressed.rawValue, value: -8),
-           RecordType(name: FeelingType.angry.rawValue, value: -8)]
+        = [RecordType(name: FeelingType.blissful.rawValue, value: 4, desc: "😇", color: Color.purple),
+           RecordType(name: FeelingType.happy.rawValue, value: 2, desc: "😎", color: Color.green),
+           RecordType(name: FeelingType.excited.rawValue, value: 2, desc: "🥳", color: Color.green),
+           RecordType(name: FeelingType.neutral.rawValue, value: 0, desc: "😐", color: Color.gray),
+           RecordType(name: FeelingType.anxious.rawValue, value: -2, desc: "😟", color: Color.yellow),
+           RecordType(name: FeelingType.stressed.rawValue, value: -4, desc: "☹️", color: Color.yellow),
+           RecordType(name: FeelingType.depressed.rawValue, value: -8, desc: "😢", color: Color.red),
+           RecordType(name: FeelingType.angry.rawValue, value: -8, desc: "😡", color: Color.red)]
     
-    let feelingTypeToEmoji: [String: String]
-        = [FeelingType.blissful.rawValue: "😇",
-           FeelingType.happy.rawValue: "😎",
-           FeelingType.depressed.rawValue: "😢",
-           FeelingType.angry.rawValue: "😡",
-           FeelingType.neutral.rawValue: "😐",
-           FeelingType.stressed.rawValue: "☹️",
-           FeelingType.anxious.rawValue: "😟",
-           FeelingType.excited.rawValue: "🥳"]
+    func getScoreGlobalDelta() -> Float{
+        let values = feelingTypeList.map { $0.value }
+        return values.max()! - values.min()!
+    }
     
     let activityTypeList: [RecordType]
         = [RecordType(name: "office_work", baseName: "work"),

@@ -8,26 +8,35 @@
 import SwiftUI
 
 struct GenericRecord: View {
+    
+    //MARK: States
     @State private var curDate = Date()
-    @State private var recordType = ""
     @State private var selectedRecordIndex = 0
+    @State private var selectedScoreIndex = 0
     @State private var showsDatePicker: Bool = false
     @State private var showsPicker: Bool = false
     @State private var isPressed: [Bool]
-    @State private var pressedFeeling: String = FeelingType.neutral.rawValue
+    //@State private var enteredRecordAndScoreList: [(RecordType, RecordType)]
+    @EnvironmentObject var settings: UserSettings
     
+    //MARK: properties
     var genericRecordModel: GenericRecordModel
     var recordTypes: [RecordType]
+    var scoreTypes: [RecordType]
     var recordTypeName: String
     
+    //MARK: constructor
     init(genericRecordModel: GenericRecordModel){
         self.genericRecordModel = genericRecordModel
         self.recordTypes = self.genericRecordModel.recordTypes
+        self.scoreTypes = self.genericRecordModel.scoreTypes
         self.recordTypeName = genericRecordModel.name
         _isPressed = State(initialValue: [Bool](repeating: false, count: genericRecordModel.scoreTypes.count))
+        //_enteredRecordAndScoreList = State(initialValue: [])
     }
     
     var body: some View {
+        //MARK: Form
         Form {
             Section {
                 HStack {
@@ -69,7 +78,7 @@ struct GenericRecord: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 40)
                                 .stroke(Color.purple, lineWidth: 5))
-
+                    
                 }.gesture(
                     TapGesture()
                         .onEnded({
@@ -89,9 +98,8 @@ struct GenericRecord: View {
                         HStack(spacing: 3) {
                             Spacer()
                             Spacer()
-                            ForEach(0..<8) { index in
-                                let pressedFeelingLocal = self.genericRecordModel.scoreTypes[index].name
-                                Text(ModelMappings.instance.feelingTypeToEmoji[pressedFeelingLocal]!)
+                            ForEach(0..<self.scoreTypes.count) { index in
+                                Text(self.scoreTypes[index].desc)
                                     .frame(width: 35, height:35)
                                     .font(.largeTitle)
                                     .scaleEffect(self.isPressed[index] ? 1.0 : 0.7)
@@ -104,7 +112,7 @@ struct GenericRecord: View {
                                                     isPressed[index] = false
                                                 }
                                                 isPressed[index] = true
-                                                self.pressedFeeling = pressedFeelingLocal
+                                                self.selectedScoreIndex = index
                                             })
                                     )
                             }
@@ -112,18 +120,47 @@ struct GenericRecord: View {
                             Spacer()
                         }
                         Spacer()
-                        Text("\(self.pressedFeeling)")
+                        Text("\(self.scoreTypes[self.selectedScoreIndex].name)")
                             .padding(10)
                             .foregroundColor(Color.orange)
                             .cornerRadius(40)
                             .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.purple, lineWidth: 5))
-
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color.purple, lineWidth: 5))
+                        
+                    }
+                }
+                Section {
+                    VStack{
+                        HStack {
+                            Text("Add more").onTapGesture{
+                                settings.enteredRecordAndScoreList.append((self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
+                            }.padding()
+                            .foregroundColor(.white)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(40)
+                            Text("Reset").onTapGesture {
+                                settings.enteredRecordAndScoreList = []
+                            }.padding()
+                            .foregroundColor(.white)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(40)
+                        }
+                        List(settings.enteredRecordAndScoreList, id:\.0.name) { elem in
+                            Text("\(elem.0.name):\(elem.1.desc)")
+                        }
                     }
                 }
             }
-        }.navigationBarTitle("Create Record")
+            //MARK: Navigation link
+            NavigationLink(destination: OneDayRecord()) {
+                Text("Show Record")
+            }.padding()
+            .foregroundColor(.white)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(40)
+            .navigationBarTitle("Create Record")
+        }
     }
 }
 

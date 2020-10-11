@@ -18,3 +18,23 @@ class Helper{
     }
 }
 
+class UserSettings: ObservableObject {
+    @Published var score = 0
+    @Published public var enteredRecordAndScoreList: [(RecordType, RecordType)] = []
+}
+
+public struct GradientColor {
+    public let start: Color
+    public let end: Color
+    
+    public init(start: Color, end: Color) {
+        self.start = start
+        self.end = end
+    }
+    
+    public func getGradient() -> Gradient {
+        return Gradient(colors: [start, end])
+    }
+}
+
+

@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct RecordByDate {
+    var date: Date
+    var enteredRecordAndSales: [(RecordType, String)]
+}
+
 struct GenericRecordModel: Identifiable {
     var id: String
     var name: String
