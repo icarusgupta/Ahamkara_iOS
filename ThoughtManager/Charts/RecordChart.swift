@@ -21,33 +21,37 @@ struct OneDayRecord: View {
             RoundedRectangle(cornerRadius: 20).fill(Color.white)
                 .shadow(color: Color.gray, radius: 8)
             HStack {
-                ForEach(0..<settings.enteredRecordAndScoreList.count) { index in
-                    let recordName = settings.enteredRecordAndScoreList[index].0.name
-                    let scoreDesc = settings.enteredRecordAndScoreList[index].1.desc
-                    let scoreColor = settings.enteredRecordAndScoreList[index].1.color
-                    let score = settings.enteredRecordAndScoreList[index].1.value + ModelMappings.instance.getScoreGlobalDelta()
-                    VStack {
-                        Spacer()
-                        Text(scoreDesc)
-                            .frame(width: 25, height: (CGFloat(score)) * 4.0 + 10)
-                            .scaleEffect(CGSize(width: 2, height: self.scaleValue), anchor: .bottom)
-                            .onAppear(){
-                                self.scaleValue = 2
-                            }
-                            .animation(Animation.spring().delay(self.delayAnim))
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(scoreColor)
-                            .frame(width: 10, height: (CGFloat(score)) * 4.0)
-                            .scaleEffect(CGSize(width: 1, height: self.scaleValue), anchor: .bottom)
-                            .onAppear(){
-                                self.scaleValue = 2
-                            }
-                            .animation(Animation.spring().delay(self.delayAnim))
-                        Text(recordName)
-                            .rotationEffect(.degrees(-90))
-                            .foregroundColor(Color.black)
-                            .frame(height: 120)
+                if settings.enteredRecordAndScoreList.count > 0 {
+                    ForEach(0..<settings.enteredRecordAndScoreList.count) { index in
+                        let recordName = settings.enteredRecordAndScoreList[index].0.name
+                        let scoreDesc = settings.enteredRecordAndScoreList[index].1.desc
+                        let scoreColor = settings.enteredRecordAndScoreList[index].1.color
+                        let score = settings.enteredRecordAndScoreList[index].1.value + ModelMappings.instance.getScoreGlobalDelta()
+                        VStack {
+                            Spacer()
+                            Text(scoreDesc)
+                                .frame(width: 25, height: (CGFloat(score)) * 4.0 + 10)
+                                .scaleEffect(CGSize(width: 2, height: self.scaleValue), anchor: .bottom)
+                                .onAppear(){
+                                    self.scaleValue = 2
+                                }
+                                .animation(Animation.spring().delay(self.delayAnim))
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(scoreColor)
+                                .frame(width: 10, height: (CGFloat(score)) * 4.0)
+                                .scaleEffect(CGSize(width: 1, height: self.scaleValue), anchor: .bottom)
+                                .onAppear(){
+                                    self.scaleValue = 2
+                                }
+                                .animation(Animation.spring().delay(self.delayAnim))
+                            Text(recordName)
+                                .rotationEffect(.degrees(-90))
+                                .foregroundColor(Color.black)
+                                .font(.footnote)
+                                .frame(height: 120)
+                        }
                     }
+
                 }
             }
         }

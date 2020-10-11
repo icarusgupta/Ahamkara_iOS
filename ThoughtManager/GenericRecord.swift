@@ -16,7 +16,6 @@ struct GenericRecord: View {
     @State private var showsDatePicker: Bool = false
     @State private var showsPicker: Bool = false
     @State private var isPressed: [Bool]
-    //@State private var enteredRecordAndScoreList: [(RecordType, RecordType)]
     @EnvironmentObject var settings: UserSettings
     
     //MARK: properties
@@ -32,7 +31,6 @@ struct GenericRecord: View {
         self.scoreTypes = self.genericRecordModel.scoreTypes
         self.recordTypeName = genericRecordModel.name
         _isPressed = State(initialValue: [Bool](repeating: false, count: genericRecordModel.scoreTypes.count))
-        //_enteredRecordAndScoreList = State(initialValue: [])
     }
     
     var body: some View {
@@ -40,15 +38,9 @@ struct GenericRecord: View {
         Form {
             Section {
                 HStack {
-                    Text("Select Date:")
-                    Text("\(curDate, formatter: Helper.app.dateFormatter)")
-                        .font(.subheadline)
-                        .foregroundColor(Color.orange)
-                        .padding(10)
-                        .cornerRadius(40)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.purple, lineWidth: 5))
+                    Text("Select Date:").frame(width: 125, height: 25)
+                    Text("\(curDate, formatter: Helper.app.dateFormatter)").frame(width: 175, height: 25)
+                        .textButtonStyle()
                 }.gesture(
                     TapGesture()
                         .onEnded({
@@ -58,7 +50,6 @@ struct GenericRecord: View {
                 
                 if showsDatePicker {
                     DatePicker("Pick date", selection: $curDate, in: ...Date(), displayedComponents: .date)
-                        //.labelsHidden()
                         .frame(height: 80, alignment: .center)
                         .compositingGroup()
                         .clipped()
@@ -70,15 +61,9 @@ struct GenericRecord: View {
                         )
                 }
                 HStack{
-                    Text("Select \(self.recordTypeName):")
-                    Text("\(self.recordTypes[selectedRecordIndex].name)")                        .font(.subheadline)
-                        .foregroundColor(Color.orange)
-                        .padding(10)
-                        .cornerRadius(40)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.purple, lineWidth: 5))
-                    
+                    Text("Select \(self.recordTypeName):").frame(width: 125, height: 25)
+                    Text("\(self.recordTypes[selectedRecordIndex].name)").frame(width: 175, height: 25)
+                        .textButtonStyle()
                 }.gesture(
                     TapGesture()
                         .onEnded({
@@ -95,6 +80,7 @@ struct GenericRecord: View {
                 Section {
                     VStack {
                         Text("Select \(self.genericRecordModel.scoreName):")
+                        Spacer()
                         HStack(spacing: 3) {
                             Spacer()
                             Spacer()
@@ -102,7 +88,7 @@ struct GenericRecord: View {
                                 Text(self.scoreTypes[index].desc)
                                     .frame(width: 35, height:35)
                                     .font(.largeTitle)
-                                    .scaleEffect(self.isPressed[index] ? 1.0 : 0.7)
+                                    .scaleEffect(self.isPressed[index] ? 1.3 : 0.7)
                                     .padding(0)
                                     .animation(.easeInOut)
                                     .gesture(
@@ -119,47 +105,43 @@ struct GenericRecord: View {
                             Spacer()
                             Spacer()
                         }
-                        Spacer()
+                        //Spacer()
                         Text("\(self.scoreTypes[self.selectedScoreIndex].name)")
-                            .padding(10)
-                            .foregroundColor(Color.orange)
-                            .cornerRadius(40)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color.purple, lineWidth: 5))
-                        
+                            .textInfoStyle()
                     }
                 }
                 Section {
                     VStack{
                         HStack {
-                            Text("Add more").onTapGesture{
-                                settings.enteredRecordAndScoreList.append((self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
-                            }.padding()
-                            .foregroundColor(.white)
-                            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(40)
+                            Spacer()
+                            Text("Add").onTapGesture{
+                                if settings.enteredRecordAndScoreList.contains(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name }) {
+                                    let matched_index = settings.enteredRecordAndScoreList.firstIndex(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name})
+                                    settings.enteredRecordAndScoreList[matched_index!] = (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex])
+                                }
+                                else{
+                                    settings.enteredRecordAndScoreList.append((self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
+                                }
+                            }.frame(width: 100, height: 25).textButtonStyle()
                             Text("Reset").onTapGesture {
                                 settings.enteredRecordAndScoreList = []
-                            }.padding()
-                            .foregroundColor(.white)
-                            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(40)
-                        }
+                            }.frame(width: 100, height: 25).textButtonStyle()
+                            Spacer()
+                        }.frame(width: 300, height: 50)
                         List(settings.enteredRecordAndScoreList, id:\.0.name) { elem in
-                            Text("\(elem.0.name):\(elem.1.desc)")
+                            HStack {
+                                Text("\(elem.0.name)").frame(width: 200, height: 25).textInfoStyle()
+                                Text("\(elem.1.desc)").frame(width: 50, height: 25).textInfoStyle()
+                            }
                         }
                     }
                 }
             }
             //MARK: Navigation link
             NavigationLink(destination: OneDayRecord()) {
-                Text("Show Record")
-            }.padding()
-            .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.orange]), startPoint: .leading, endPoint: .trailing))
-            .cornerRadius(40)
-            .navigationBarTitle("Create Record")
+                Text("Show Record").frame(width: 200, height: 25).textButtonStyle()
+            }
+            .navigationBarTitle("Create Record").frame(height: 50)
         }
     }
 }
