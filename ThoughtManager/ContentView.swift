@@ -18,7 +18,7 @@ struct ContentView: View {
                 Text("Thought Manager").font(.title)
                 Image("rwdevcon-bg")
                 List(genericRecordList.recordModelList, id:\.name){ recordModel in
-                NavigationLink(destination: GenericRecord(genericRecordModel: recordModel )){
+                    NavigationLink(destination: GenericRecord(genericRecordModel: recordModel)){
                         Text("\(recordModel.name)").frame(width: 200, height: 25).textButtonStyle()
                     }
                 }

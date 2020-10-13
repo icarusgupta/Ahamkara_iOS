@@ -9,24 +9,31 @@ import Foundation
 import SwiftUI
 
 struct OneDayRecord: View {
-    @EnvironmentObject var settings: UserSettings
+    var recordTypeName: String
     var index: Int = 100
-    @State var scaleValue: Int = 0
     var delayAnim: Double = 0.2
     var lowest_val: Int = -8
     var gradient: GradientColor?
+    @State var scaleValue: Int = 0
+    @EnvironmentObject var settings: UserSettings
+    
+    init(recordTypeName: String){
+        self.recordTypeName = recordTypeName
+    }
     
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20).fill(Color.white)
                 .shadow(color: Color.gray, radius: 8)
             HStack {
-                if settings.enteredRecordAndScoreList.count > 0 {
-                    ForEach(0..<settings.enteredRecordAndScoreList.count) { index in
-                        let recordName = settings.enteredRecordAndScoreList[index].0.name
-                        let scoreDesc = settings.enteredRecordAndScoreList[index].1.desc
-                        let scoreColor = settings.enteredRecordAndScoreList[index].1.color
-                        let score = settings.enteredRecordAndScoreList[index].1.value + ModelMappings.instance.getScoreGlobalDelta()
+                let userPatternData = settings.userPatternData(recordTypeName: self.recordTypeName)
+                if userPatternData.count > 0 {
+                    ForEach(0..<userPatternData.count) { index in
+                        let userPatternDataElem = settings.userPatternData(recordTypeName: self.recordTypeName)[index]
+                        let recordName = userPatternDataElem.0.name
+                        let scoreDesc = userPatternDataElem.1.desc
+                        let scoreColor = userPatternDataElem.1.color
+                        let score = userPatternDataElem.1.value + ModelMappings.instance.getScoreGlobalDelta()
                         VStack {
                             Spacer()
                             Text(scoreDesc)

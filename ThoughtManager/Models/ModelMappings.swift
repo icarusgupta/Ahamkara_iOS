@@ -16,6 +16,10 @@ enum ContextType: String{
     case weekday, weekend, holiday
 }
 
+enum UserPatternType: String{
+    case Activity, Thought
+}
+
 struct RecordType{
     var name: String
     var baseName: String

@@ -20,7 +20,45 @@ class Helper{
 
 class UserSettings: ObservableObject {
     @Published var score = 0
-    @Published public var enteredRecordAndScoreList: [(RecordType, RecordType)] = []
+    @Published var userActivityData: [(RecordType, RecordType)] = []
+    @Published var userThoughtData: [(RecordType, RecordType)] = []
+    
+    func userPatternData(recordTypeName: String) -> [(RecordType, RecordType)]{
+        if recordTypeName == UserPatternType.Activity.rawValue{
+            return userActivityData
+        }
+        else{
+            return userThoughtData
+        }
+    }
+    
+    func resetUserPatternData(recordTypeName: String){
+        if recordTypeName == UserPatternType.Activity.rawValue{
+            userActivityData = []
+        }
+        else{
+            userThoughtData = []
+        }
+    }
+
+    func appendUserPatternData(recordTypeName: String, value: (RecordType, RecordType)){
+        if recordTypeName == UserPatternType.Activity.rawValue{
+            userActivityData.append(value)
+        }
+        else{
+            userThoughtData.append(value)
+        }
+    }
+    
+    func setValueUserPatternData(recordTypeName: String, index: Int, value: (RecordType, RecordType)){
+        if recordTypeName == UserPatternType.Activity.rawValue{
+            userActivityData[index] = value
+        }
+        else{
+            userThoughtData[index] = value
+        }
+    }
+
 }
 
 public struct GradientColor {
