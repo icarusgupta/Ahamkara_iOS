@@ -14,26 +14,34 @@ struct OneDayRecord: View {
     var delayAnim: Double = 0.2
     var lowest_val: Int = -8
     var gradient: GradientColor?
+    var curDate: Date
     @State var scaleValue: Int = 0
     @EnvironmentObject var settings: UserSettings
     
-    init(recordTypeName: String){
+    init(recordTypeName: String, curDate: Date){
         self.recordTypeName = recordTypeName
+        self.curDate = curDate
     }
     
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20).fill(Color.white)
                 .shadow(color: Color.gray, radius: 8)
+            List(settings.userPatternData(recordTypeName: self.recordTypeName, date: self.curDate), id:\.0.name) { elem in
+                HStack {
+                    Text("\(elem.0.name)").frame(width: 200, height: 25).textCompactInfoStyle()
+                    Text("\(elem.1.desc)").frame(width: 50, height: 25).textCompactInfoStyle()
+                }
+            }
             HStack {
-                let userPatternData = settings.userPatternData(recordTypeName: self.recordTypeName)
+                let userPatternData = settings.userPatternData(recordTypeName: self.recordTypeName, date: curDate)
                 if userPatternData.count > 0 {
                     ForEach(0..<userPatternData.count) { index in
-                        let userPatternDataElem = settings.userPatternData(recordTypeName: self.recordTypeName)[index]
+                        let userPatternDataElem = settings.userPatternData(recordTypeName: self.recordTypeName, date: curDate)[index]
                         let recordName = userPatternDataElem.0.name
                         let scoreDesc = userPatternDataElem.1.desc
                         let scoreColor = userPatternDataElem.1.color
-                        let score = userPatternDataElem.1.value + ModelMappings.instance.getScoreGlobalDelta()
+                        let score = userPatternDataElem.1.value + AggFuncs.getScoreGlobalDelta(fTypeList: ModelMappings.instance.feelingTypeList)
                         VStack {
                             Spacer()
                             Text(scoreDesc)

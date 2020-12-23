@@ -16,7 +16,7 @@ struct GenericRecord: View {
     @State private var showsDatePicker: Bool = false
     @State private var showsPicker: Bool = false
     @State private var isPressed: [Bool]
-
+    
     @EnvironmentObject var settings: UserSettings
     
     //MARK: properties
@@ -100,6 +100,7 @@ struct GenericRecord: View {
                                                 }
                                                 isPressed[index] = true
                                                 self.selectedScoreIndex = index
+                                                //createTask()
                                             })
                                     )
                             }
@@ -116,24 +117,30 @@ struct GenericRecord: View {
                         HStack {
                             Spacer()
                             Text("Add").onTapGesture{
-                                if settings.userPatternData(recordTypeName: self.recordTypeName).contains(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name }) {
-                                    let matched_index = settings.userPatternData(recordTypeName: self.recordTypeName).firstIndex(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name})
-                                    settings.setValueUserPatternData(recordTypeName: self.recordTypeName,
-                                                                     index: matched_index!,
-                                                                     value: (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
-
+                                if settings.userPatternData(
+                                    recordTypeName: self.recordTypeName,
+                                    date: self.curDate).contains(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name }) {
+                                    let matched_index = settings.userPatternData(recordTypeName: self.recordTypeName, date: self.curDate).firstIndex(where: { $0.0.name == self.recordTypes[selectedRecordIndex].name})
+                                    settings.setValueUserPatternData(
+                                        recordTypeName: self.recordTypeName,
+                                        date: self.curDate,
+                                        index: matched_index!,
+                                        value: (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
                                 }
                                 else{
-                                    settings.appendUserPatternData(recordTypeName: self.recordTypeName, value: (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
+                                    settings.appendUserPatternData(recordTypeName: self.recordTypeName,
+                                                                   date: self.curDate,
+                                                                   value: (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
                                 }
-
+                                
                             }.frame(width: 100, height: 25).textButtonStyle()
                             Text("Reset").onTapGesture {
-                                settings.resetUserPatternData(recordTypeName: self.recordTypeName)
+                                settings.resetUserPatternData(recordTypeName: self.recordTypeName, date: self.curDate)
                             }.frame(width: 100, height: 25).textButtonStyle()
                             Spacer()
                         }.frame(width: 300, height: 50)
-                        List(settings.userPatternData(recordTypeName: self.recordTypeName), id:\.0.name) { elem in
+                        Spacer()
+                        List(settings.userPatternData(recordTypeName: self.recordTypeName, date: self.curDate), id:\.0.name) { elem in
                             HStack {
                                 Text("\(elem.0.name)").frame(width: 200, height: 25).textInfoStyle()
                                 Text("\(elem.1.desc)").frame(width: 50, height: 25).textInfoStyle()
@@ -143,7 +150,7 @@ struct GenericRecord: View {
                 }
             }
             //MARK: Navigation link
-            NavigationLink(destination: OneDayRecord(recordTypeName: self.recordTypeName)) {
+            NavigationLink(destination: OneDayRecord(recordTypeName: self.recordTypeName, curDate: self.curDate)) {
                 Text("Show Record").frame(width: 200, height: 25).textButtonStyle()
             }
             .navigationBarTitle("Create Record").frame(height: 50)

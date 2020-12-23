@@ -4,16 +4,21 @@
 //
 //  Created by Icarus Gupta on 07/10/2020.
 //
-
+import Amplify
+import AmplifyPlugins
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        do {
+            try Amplify.add(plugin: AWSAPIPlugin(modelRegistration: AmplifyModels()))
+            try Amplify.configure()
+        } catch {
+            print("An error occurred setting up Amplify: \(error)")
+        }
         return true
     }
 
