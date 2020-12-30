@@ -9,54 +9,74 @@ import Foundation
 
 
 class UserSettings: ObservableObject {
-    @Published var userActivityData: [Date: [(RecordType, RecordType)]] = [:]
-    @Published var userThoughtData: [Date: [(RecordType, RecordType)]] = [:]
+    @Published var userActivityData: [Date: [(RecordType, RecordType)]]
+    @Published var userThoughtData: [Date: [(RecordType, RecordType)]]
+    
+    init(){
+        self.userActivityData = [:]
+        self.userThoughtData = [:]
+    }
     
     func userPatternData(recordTypeName: String, date: Date) -> [(RecordType, RecordType)]{
         if recordTypeName == UserPatternType.Activity.rawValue{
-            return userActivityData[date] ?? []
+            return self.userActivityData[date] ?? []
         }
         else{
-            return userThoughtData[date] ?? []
+            return self.userThoughtData[date] ?? []
         }
     }
     
     func resetUserPatternData(recordTypeName: String, date: Date){
         if recordTypeName == UserPatternType.Activity.rawValue{
-            userActivityData[date] = []
+            self.userActivityData[date] = []
         }
         else{
-            userThoughtData[date] = []
+            self.userThoughtData[date] = []
         }
     }
 
     func appendUserPatternData(recordTypeName: String, date: Date, value: (RecordType, RecordType)){
         if recordTypeName == UserPatternType.Activity.rawValue{
-            if userActivityData.index(forKey: date) == nil{
-                userActivityData[date] = [value]
+            if self.userActivityData.index(forKey: date) == nil{
+                self.userActivityData[date] = [value]
             }
             else{
-                userActivityData[date]!.append(value)
+                self.userActivityData[date]!.append(value)
             }
         }
         else{
-            if userThoughtData.index(forKey: date) == nil{
-                userThoughtData[date] = [value]
+            if self.userThoughtData.index(forKey: date) == nil{
+                self.userThoughtData[date] = [value]
             }
             else{
-                userThoughtData[date]!.append(value)
+                self.userThoughtData[date]!.append(value)
             }
         }
     }
     
-    func setValueUserPatternData(recordTypeName: String, date: Date, index: Int, value: (RecordType, RecordType)){
+    func setValueUserPatternData(recordTypeName: String,
+                                 date: Date,
+                                 index: Int,
+                                 size: Int,
+                                 value: (RecordType, RecordType)){
         if recordTypeName == UserPatternType.Activity.rawValue{
-            userActivityData[date]?[index] = value
+            if self.userActivityData[date] != nil{
+                self.userActivityData[date]![index] = value
+            }
+            else{
+                self.userActivityData[date] = [(RecordType, RecordType)](repeating: (RecordType(name: ""), RecordType(name: "")), count: size)
+                self.userActivityData[date]![index] = value
+            }
         }
         else{
-            userThoughtData[date]?[index] = value
+            if self.userThoughtData[date] != nil{
+                self.userThoughtData[date]![index] = value
+            }
+            else{
+                self.userThoughtData[date] = [(RecordType, RecordType)](repeating: (RecordType(name: ""), RecordType(name: "")), count: size)
+                self.userThoughtData[date]![index] = value
+            }
         }
     }
-
 }
 

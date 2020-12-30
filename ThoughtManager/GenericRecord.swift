@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import Amplify
+import Combine
+
+var cancellable: AnyCancellable?
+
 
 struct GenericRecord: View {
     
     //MARK: States
-    @State private var curDate = Date()
+    @State public var curDate = Date()
     @State private var selectedRecordIndex = 0
     @State private var selectedScoreIndex = 0
     @State private var showsDatePicker: Bool = false
@@ -18,7 +23,7 @@ struct GenericRecord: View {
     @State private var isPressed: [Bool]
     
     @EnvironmentObject var settings: UserSettings
-    
+
     //MARK: properties
     var genericRecordModel: GenericRecordModel
     var recordTypes: [RecordType]
@@ -34,10 +39,51 @@ struct GenericRecord: View {
         _isPressed = State(initialValue: [Bool](repeating: false, count: genericRecordModel.scoreTypes.count))
     }
     
+    private func setRetrievedData(_ fetchedRecords: [RecordDS]?) {
+      DispatchQueue.main.async {
+        if let fetchedRecords = fetchedRecords {
+            for i in 0..<fetchedRecords.count {
+                settings.setValueUserPatternData(
+                    recordTypeName: self.recordTypeName,
+                    date: self.curDate,
+                    index: i,
+                    size: fetchedRecords.count,
+                    value: (RecordType(name: fetchedRecords[i].patternName,
+                                        baseName: ModelMappings.instance.activityMap[fetchedRecords[i].patternName]!.0,
+                                        value: ModelMappings.instance.activityMap[fetchedRecords[i].patternName]!.1,
+                                        desc: "",
+                                        color: Color.purple),
+                             RecordType(name: fetchedRecords[i].scoreName,
+                                        baseName: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.0,
+                                        value: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.1,
+                                        desc: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.2,
+                                        color: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.3)
+                         )
+                    )
+                }
+            }
+        }
+    }
+    
+    func retrieveData(dailyKey: String){
+        cancellable = listRecords(dailyKey: dailyKey)
+          .sink(receiveCompletion: { completion in
+            switch completion {
+            case .failure(let error):
+              print(error)
+            case .finished: ()
+            }
+          }, receiveValue: { user in
+            setRetrievedData(user)
+          })
+    }
+    
     var body: some View {
         //MARK: Form
         Form {
+            //MARK: Section
             Section {
+                //MARK: HStack
                 HStack {
                     Text("Select Date:").frame(width: 125, height: 25)
                     Text("\(curDate, formatter: Helper.app.dateFormatter)").frame(width: 175, height: 25)
@@ -61,6 +107,7 @@ struct GenericRecord: View {
                                 })
                         )
                 }
+                //MARK: HStack
                 HStack{
                     Text("Select \(self.recordTypeName):").frame(width: 125, height: 25)
                     Text("\(self.recordTypes[selectedRecordIndex].name)").frame(width: 175, height: 25)
@@ -78,7 +125,9 @@ struct GenericRecord: View {
                         }
                     }
                 }
+                //MARK: Section
                 Section {
+                    //MARK: VStack
                     VStack {
                         Text("Select \(self.genericRecordModel.scoreName):")
                         Spacer()
@@ -100,20 +149,21 @@ struct GenericRecord: View {
                                                 }
                                                 isPressed[index] = true
                                                 self.selectedScoreIndex = index
-                                                //createTask()
                                             })
                                     )
                             }
                             Spacer()
                             Spacer()
                         }
-                        //Spacer()
                         Text("\(self.scoreTypes[self.selectedScoreIndex].name)")
                             .textInfoStyle()
                     }
                 }
+                //MARK: Section
                 Section {
+                    //MARK: VStack
                     VStack{
+                        //MARK: HStack
                         HStack {
                             Spacer()
                             Text("Add").onTapGesture{
@@ -125,6 +175,7 @@ struct GenericRecord: View {
                                         recordTypeName: self.recordTypeName,
                                         date: self.curDate,
                                         index: matched_index!,
+                                        size: 0,
                                         value: (self.recordTypes[selectedRecordIndex], self.scoreTypes[selectedScoreIndex]))
                                 }
                                 else{
@@ -149,6 +200,22 @@ struct GenericRecord: View {
                     }
                 }
             }
+            Text("Save Record").frame(width: 200, height: 25).textButtonStyle()
+                .onTapGesture{
+                    let dbUtils = DbUtils()
+                    let patternScoreList = settings.userPatternData(
+                        recordTypeName: self.recordTypeName,
+                        date: self.curDate)
+                    //var a = getRecord(DbUtils.getId(date: self.curDate))
+                    dbUtils.persistData(genericRecord: self, dbOperation: DbOperation.Create, patternScoreList: patternScoreList)
+                }
+            Text("Load Record").frame(width: 200, height: 25).textButtonStyle()
+                .onTapGesture{
+                    retrieveData(dailyKey: DbUtils.getDailyKey(date: self.curDate,
+                                                               pattern: self.genericRecordModel.name,
+                                                               score: self.genericRecordModel.scoreName))
+                    }
+            }
             //MARK: Navigation link
             NavigationLink(destination: OneDayRecord(recordTypeName: self.recordTypeName, curDate: self.curDate)) {
                 Text("Show Record").frame(width: 200, height: 25).textButtonStyle()
@@ -156,5 +223,5 @@ struct GenericRecord: View {
             .navigationBarTitle("Create Record").frame(height: 50)
         }
     }
-}
+
 

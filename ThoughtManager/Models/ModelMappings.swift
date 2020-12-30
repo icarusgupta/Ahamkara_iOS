@@ -17,7 +17,7 @@ enum ContextType: String{
 }
 
 enum UserPatternType: String{
-    case Activity, Thought
+    case Activity, Thought, Feeling
 }
 
 struct RecordType{

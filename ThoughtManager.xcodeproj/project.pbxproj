@@ -17,14 +17,13 @@
 		E9392C92252F1BD1003E86D2 /* GenericRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */; };
 		E9392C9A252F24C1003E86D2 /* GenericRecordModelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C99252F24C1003E86D2 /* GenericRecordModelList.swift */; };
 		E9392C9F252F2AD9003E86D2 /* ModelMappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392C9E252F2AD9003E86D2 /* ModelMappings.swift */; };
-		E989871A258FE9D10029B382 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E9898718258FE9D00029B382 /* amplifyconfiguration.json */; };
-		E989871B258FE9D10029B382 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E9898719258FE9D10029B382 /* awsconfiguration.json */; };
-		E9898725259003BE0029B382 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898720259003BE0029B382 /* AmplifyModels.swift */; };
-		E9898726259003BE0029B382 /* Note+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898721259003BE0029B382 /* Note+Schema.swift */; };
-		E9898727259003BE0029B382 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898722259003BE0029B382 /* Note.swift */; };
-		E9898728259003BE0029B382 /* Task+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898723259003BE0029B382 /* Task+Schema.swift */; };
-		E9898729259003BE0029B382 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898724259003BE0029B382 /* Task.swift */; };
 		E989872E2590108C0029B382 /* ApiCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989872D2590108C0029B382 /* ApiCode.swift */; };
+		E98987422594CD230029B382 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E98987402594CD230029B382 /* amplifyconfiguration.json */; };
+		E989874B2594CD3C0029B382 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E989874A2594CD3C0029B382 /* awsconfiguration.json */; };
+		E98987522594CFEF0029B382 /* RecordDS+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989874F2594CFEF0029B382 /* RecordDS+Schema.swift */; };
+		E98987532594CFEF0029B382 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98987502594CFEF0029B382 /* AmplifyModels.swift */; };
+		E98987542594CFEF0029B382 /* RecordDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98987512594CFEF0029B382 /* RecordDS.swift */; };
+		E9898772259513540029B382 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9898771259513530029B382 /* API.swift */; };
 		E9F7FF21252E52B2005DFAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */; };
 		E9F7FF23252E52B2005DFAF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF22252E52B2005DFAF1 /* SceneDelegate.swift */; };
 		E9F7FF25252E52B2005DFAF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7FF24252E52B2005DFAF1 /* ContentView.swift */; };
@@ -67,14 +66,13 @@
 		E9392C91252F1BD1003E86D2 /* GenericRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecordModel.swift; sourceTree = "<group>"; };
 		E9392C99252F24C1003E86D2 /* GenericRecordModelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRecordModelList.swift; sourceTree = "<group>"; };
 		E9392C9E252F2AD9003E86D2 /* ModelMappings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMappings.swift; sourceTree = "<group>"; };
-		E9898718258FE9D00029B382 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
-		E9898719258FE9D10029B382 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
-		E9898720259003BE0029B382 /* AmplifyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplifyModels.swift; sourceTree = "<group>"; };
-		E9898721259003BE0029B382 /* Note+Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Schema.swift"; sourceTree = "<group>"; };
-		E9898722259003BE0029B382 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		E9898723259003BE0029B382 /* Task+Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Schema.swift"; sourceTree = "<group>"; };
-		E9898724259003BE0029B382 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E989872D2590108C0029B382 /* ApiCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCode.swift; sourceTree = "<group>"; };
+		E98987402594CD230029B382 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
+		E989874A2594CD3C0029B382 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		E989874F2594CFEF0029B382 /* RecordDS+Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RecordDS+Schema.swift"; sourceTree = "<group>"; };
+		E98987502594CFEF0029B382 /* AmplifyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplifyModels.swift; sourceTree = "<group>"; };
+		E98987512594CFEF0029B382 /* RecordDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDS.swift; sourceTree = "<group>"; };
+		E9898771259513530029B382 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = SOURCE_ROOT; };
 		E9F7FF1D252E52B2005DFAF1 /* ThoughtManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThoughtManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F7FF20252E52B2005DFAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F7FF22252E52B2005DFAF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,11 +147,9 @@
 		E989871F259003BE0029B382 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				E9898720259003BE0029B382 /* AmplifyModels.swift */,
-				E9898721259003BE0029B382 /* Note+Schema.swift */,
-				E9898722259003BE0029B382 /* Note.swift */,
-				E9898723259003BE0029B382 /* Task+Schema.swift */,
-				E9898724259003BE0029B382 /* Task.swift */,
+				E98987502594CFEF0029B382 /* AmplifyModels.swift */,
+				E98987512594CFEF0029B382 /* RecordDS.swift */,
+				E989874F2594CFEF0029B382 /* RecordDS+Schema.swift */,
 			);
 			name = models;
 			path = amplify/generated/models;
@@ -191,9 +187,9 @@
 		E9F7FF1F252E52B2005DFAF1 /* ThoughtManager */ = {
 			isa = PBXGroup;
 			children = (
+				E989874A2594CD3C0029B382 /* awsconfiguration.json */,
+				E98987402594CD230029B382 /* amplifyconfiguration.json */,
 				E989871F259003BE0029B382 /* models */,
-				E9898718258FE9D00029B382 /* amplifyconfiguration.json */,
-				E9898719258FE9D10029B382 /* awsconfiguration.json */,
 				E9B89D08253F964600477741 /* AmplifyConfig */,
 				E93292CC2530ABF800BEA623 /* Charts */,
 				E9392C90252F1BA2003E86D2 /* Models */,
@@ -209,6 +205,7 @@
 				E9F7FF28252E52B3005DFAF1 /* Preview Content */,
 				E93292D22530B7E100BEA623 /* temp.swift */,
 				E93292D7253105EA00BEA623 /* Colors.xcassets */,
+				E9898771259513530029B382 /* API.swift */,
 				E989872D2590108C0029B382 /* ApiCode.swift */,
 			);
 			path = ThoughtManager;
@@ -365,8 +362,8 @@
 			files = (
 				E9F7FF2D252E52B3005DFAF1 /* LaunchScreen.storyboard in Resources */,
 				E93292D8253105EA00BEA623 /* Colors.xcassets in Resources */,
-				E989871B258FE9D10029B382 /* awsconfiguration.json in Resources */,
-				E989871A258FE9D10029B382 /* amplifyconfiguration.json in Resources */,
+				E989874B2594CD3C0029B382 /* awsconfiguration.json in Resources */,
+				E98987422594CD230029B382 /* amplifyconfiguration.json in Resources */,
 				E9F7FF2A252E52B3005DFAF1 /* Preview Assets.xcassets in Resources */,
 				E9F7FF27252E52B3005DFAF1 /* Assets.xcassets in Resources */,
 			);
@@ -436,23 +433,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E989872E2590108C0029B382 /* ApiCode.swift in Sources */,
+				E98987522594CFEF0029B382 /* RecordDS+Schema.swift in Sources */,
 				E9392C92252F1BD1003E86D2 /* GenericRecordModel.swift in Sources */,
 				E9F7FF21252E52B2005DFAF1 /* AppDelegate.swift in Sources */,
+				E98987532594CFEF0029B382 /* AmplifyModels.swift in Sources */,
 				E9392C86252E68C4003E86D2 /* Helper.swift in Sources */,
 				E9F7FF5F252E5A49005DFAF1 /* HistoricalGraph.swift in Sources */,
 				E93292CE2530AC1400BEA623 /* RecordChart.swift in Sources */,
 				E9392C9F252F2AD9003E86D2 /* ModelMappings.swift in Sources */,
-				E9898725259003BE0029B382 /* AmplifyModels.swift in Sources */,
-				E9898726259003BE0029B382 /* Note+Schema.swift in Sources */,
 				E9392C7E252E64AA003E86D2 /* GenericRecord.swift in Sources */,
 				E9392C9A252F24C1003E86D2 /* GenericRecordModelList.swift in Sources */,
 				E9F7FF23252E52B2005DFAF1 /* SceneDelegate.swift in Sources */,
-				E9898727259003BE0029B382 /* Note.swift in Sources */,
-				E9898728259003BE0029B382 /* Task+Schema.swift in Sources */,
+				E98987542594CFEF0029B382 /* RecordDS.swift in Sources */,
 				E9F7FF57252E5A2B005DFAF1 /* OneDayGraph.swift in Sources */,
 				E93292F32538EF1D00BEA623 /* PatternData.swift in Sources */,
 				E9F7FF25252E52B2005DFAF1 /* ContentView.swift in Sources */,
-				E9898729259003BE0029B382 /* Task.swift in Sources */,
+				E9898772259513540029B382 /* API.swift in Sources */,
 				E93292D32530B7E100BEA623 /* temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
