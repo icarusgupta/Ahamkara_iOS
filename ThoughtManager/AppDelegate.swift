@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try Amplify.add(plugin: AWSAPIPlugin(modelRegistration: AmplifyModels()))
             try Amplify.configure()
+            //UIScrollView.appearance().bounces = false
         } catch {
             print("An error occurred setting up Amplify: \(error)")
         }

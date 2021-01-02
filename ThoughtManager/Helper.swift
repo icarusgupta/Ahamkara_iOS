@@ -7,50 +7,6 @@
 import SwiftUI
 import Amplify
 
-enum DbOperation: String{
-    case Create, Update, Delete
-}
-
-class DbUtils{
-    
-    class func getDailyKey(date: Date, pattern: String, score: String) -> String{
-        let user = UIDevice.current.name
-        return stringFromDate(date) + "." + user + "." + pattern + "." + score
-    }
-        
-    func persistData(genericRecord: GenericRecord,
-                     dbOperation: DbOperation,
-                     patternScoreList: [(RecordType, RecordType)]) {
-        patternScoreList.forEach {
-            let pattern = $0.0
-            let score = $0.1
-            let user = UIDevice.current.name
-            let date = Temporal.Date(genericRecord.curDate)
-            let rec = RecordDS(dailyKey: DbUtils.getDailyKey(date: genericRecord.curDate,
-                                                       pattern: genericRecord.genericRecordModel.name,
-                                                       score: genericRecord.genericRecordModel.scoreName),
-                               date: date,
-                               username: user,
-                               pattern: genericRecord.genericRecordModel.name,
-                               score: genericRecord.genericRecordModel.scoreName,
-                               patternName: pattern.name,
-                               scoreName: score.name)
-            switch(dbOperation){
-                case DbOperation.Create:
-                    //Save to DynamoDB
-                    createRecord(rec)
-                case DbOperation.Update:
-                    //Delete from DynamoDB
-                    deleteRecord(rec)
-                    //Update DynamoDB
-                    updateRecord(rec)
-                case DbOperation.Delete:
-                    //Delete from DynamoDB
-                    deleteRecord(rec)
-            }
-        }
-    }
-}
 
 class Helper{
     
@@ -66,10 +22,10 @@ class Helper{
     }
 }
 
-func stringFromDate(_ date: Date) -> String {
+func stringFromDate(_ date: Date, format: String = "yyyy-MM-dd") -> String {
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone(abbreviation: "UTC")
-    formatter.dateFormat = "yyyy-MM-dd"
+    formatter.dateFormat = format
     return formatter.string(from: date)
 }
 

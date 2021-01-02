@@ -20,6 +20,10 @@ enum UserPatternType: String{
     case Activity, Thought, Feeling
 }
 
+enum RetrievalType: String{
+    case DailyKey, DateRange
+}
+
 struct RecordType{
     var name: String
     var baseName: String
@@ -75,14 +79,14 @@ struct ModelMappings{
     }
     
     let feelingMap: [String: (String, Float, String, Color)]
-        = [FeelingType.blissful.rawValue : (baseName: "positive", value: 4, desc: "😇", color: Color.purple),
-           FeelingType.happy.rawValue: (baseName: "positive", value: 2, desc: "😎", color: Color.green),
-           FeelingType.excited.rawValue: (baseName: "positive", value: 2, desc: "🥳", color: Color.green),
-           FeelingType.neutral.rawValue: (baseName: "positive", value: 0, desc: "😐", color: Color.gray),
-           FeelingType.anxious.rawValue: (baseName: "negative", value: -2, desc: "😟", color: Color.yellow),
-           FeelingType.stressed.rawValue: (baseName: "negative", value: -4, desc: "☹️", color: Color.yellow),
-           FeelingType.depressed.rawValue: (baseName: "negative", value: -8, desc: "😢", color: Color.red),
-           FeelingType.angry.rawValue: (baseName: "negative", value: -8, desc: "😡", color: Color.red)]
+        = [FeelingType.blissful.rawValue : (baseName: "positive", value: 14, desc: "😇", color: Color.purple),
+           FeelingType.happy.rawValue: (baseName: "positive", value: 12, desc: "😎", color: Color.green),
+           FeelingType.excited.rawValue: (baseName: "positive", value: 12, desc: "🥳", color: Color.green),
+           FeelingType.neutral.rawValue: (baseName: "positive", value: 10, desc: "😐", color: Color.gray),
+           FeelingType.anxious.rawValue: (baseName: "negative", value: 8, desc: "😟", color: Color.yellow),
+           FeelingType.stressed.rawValue: (baseName: "negative", value: 6, desc: "☹️", color: Color.yellow),
+           FeelingType.depressed.rawValue: (baseName: "negative", value: 2, desc: "😢", color: Color.red),
+           FeelingType.angry.rawValue: (baseName: "negative", value: 2, desc: "😡", color: Color.red)]
     
     let activityMap: [String: (String, Float)]
         = ["office_work": (baseName: "work", value: 4),

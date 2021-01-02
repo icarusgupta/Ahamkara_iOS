@@ -62,11 +62,9 @@ func deleteRecord(_ rec: RecordDS) -> AnyCancellable {
     return sink
 }
 
-func listRecords(dailyKey: String) -> Future<[RecordDS], Error> {
+func listRecords(predicate: QueryPredicate? = nil) -> Future<[RecordDS], Error> {
   return Future {
     promise in
-    let rec = RecordDS.keys
-    let predicate = rec.dailyKey == dailyKey
     Amplify.API.query(request: .list(RecordDS.self, where: predicate)) { event in
         switch event {
         case .success(let result):
@@ -83,3 +81,17 @@ func listRecords(dailyKey: String) -> Future<[RecordDS], Error> {
     }
   }
 }
+
+func listRecordsByDailyKey(dailyKey: String) -> Future<[RecordDS], Error>{
+    let k = RecordDS.keys
+    let predicate = k.dailyKey == dailyKey
+    return listRecords(predicate: predicate)
+}
+
+func listRecordsByDateRange(startDate: Date, endDate: Date) -> Future<[RecordDS], Error>{
+    let k = RecordDS.keys
+    let predicate_1 = k.date >= Temporal.Date(startDate) //& k.date <= endDate
+    let predicate_2 = k.date <= Temporal.Date(endDate) //& k.date <= endDate
+    return listRecords(predicate: predicate_1 && predicate_2)
+}
+

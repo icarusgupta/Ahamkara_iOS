@@ -17,9 +17,14 @@ struct ContentView: View {
                 Text("Ahamkara").font(.largeTitle).foregroundColor(.purple)
                 Text("Thought Manager").font(.title)
                 Image("rwdevcon-bg")
-                List(genericRecordList.recordModelList, id:\.name){ recordModel in
-                    NavigationLink(destination: GenericRecord(genericRecordModel: recordModel)){
-                        Text("\(recordModel.name)").frame(width: 200, height: 25).textButtonStyle()
+                List{
+                    ForEach(genericRecordList.recordModelList) { recordModel in
+                        NavigationLink(destination: GenericRecord(genericRecordModel: recordModel)){
+                            Text("\(recordModel.name)").frame(width: 200, height: 25).textButtonStyle()
+                        }
+                    }
+                    NavigationLink(destination: HistoricalGraphTab()) {
+                        Text("Show History").frame(width: 200, height: 25).textButtonStyle()
                     }
                 }
             }

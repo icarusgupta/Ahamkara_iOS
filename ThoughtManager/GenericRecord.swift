@@ -38,46 +38,7 @@ struct GenericRecord: View {
         self.recordTypeName = genericRecordModel.name
         _isPressed = State(initialValue: [Bool](repeating: false, count: genericRecordModel.scoreTypes.count))
     }
-    
-    private func setRetrievedData(_ fetchedRecords: [RecordDS]?) {
-      DispatchQueue.main.async {
-        if let fetchedRecords = fetchedRecords {
-            for i in 0..<fetchedRecords.count {
-                settings.setValueUserPatternData(
-                    recordTypeName: self.recordTypeName,
-                    date: self.curDate,
-                    index: i,
-                    size: fetchedRecords.count,
-                    value: (RecordType(name: fetchedRecords[i].patternName,
-                                        baseName: ModelMappings.instance.activityMap[fetchedRecords[i].patternName]!.0,
-                                        value: ModelMappings.instance.activityMap[fetchedRecords[i].patternName]!.1,
-                                        desc: "",
-                                        color: Color.purple),
-                             RecordType(name: fetchedRecords[i].scoreName,
-                                        baseName: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.0,
-                                        value: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.1,
-                                        desc: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.2,
-                                        color: ModelMappings.instance.feelingMap[fetchedRecords[i].scoreName]!.3)
-                         )
-                    )
-                }
-            }
-        }
-    }
-    
-    func retrieveData(dailyKey: String){
-        cancellable = listRecords(dailyKey: dailyKey)
-          .sink(receiveCompletion: { completion in
-            switch completion {
-            case .failure(let error):
-              print(error)
-            case .finished: ()
-            }
-          }, receiveValue: { user in
-            setRetrievedData(user)
-          })
-    }
-    
+        
     var body: some View {
         //MARK: Form
         Form {
@@ -95,7 +56,7 @@ struct GenericRecord: View {
                         })
                 )
                 
-                if showsDatePicker {
+                if self.showsDatePicker {
                     DatePicker("Pick date", selection: $curDate, in: ...Date(), displayedComponents: .date)
                         .frame(height: 80, alignment: .center)
                         .compositingGroup()
@@ -206,22 +167,21 @@ struct GenericRecord: View {
                     let patternScoreList = settings.userPatternData(
                         recordTypeName: self.recordTypeName,
                         date: self.curDate)
-                    //var a = getRecord(DbUtils.getId(date: self.curDate))
                     dbUtils.persistData(genericRecord: self, dbOperation: DbOperation.Create, patternScoreList: patternScoreList)
                 }
             Text("Load Record").frame(width: 200, height: 25).textButtonStyle()
                 .onTapGesture{
-                    retrieveData(dailyKey: DbUtils.getDailyKey(date: self.curDate,
+                    settings.retrieveData(dailyKey: DbUtils.getDailyKey(date: self.curDate,
                                                                pattern: self.genericRecordModel.name,
-                                                               score: self.genericRecordModel.scoreName))
+                                                               score: self.genericRecordModel.scoreName),
+                                 recordTypeName: self.recordTypeName)
                     }
-            }
             //MARK: Navigation link
             NavigationLink(destination: OneDayRecord(recordTypeName: self.recordTypeName, curDate: self.curDate)) {
                 Text("Show Record").frame(width: 200, height: 25).textButtonStyle()
             }
-            .navigationBarTitle("Create Record").frame(height: 50)
         }
     }
+}
 
 
